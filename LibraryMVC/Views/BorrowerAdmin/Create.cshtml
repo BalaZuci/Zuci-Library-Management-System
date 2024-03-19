@@ -69,10 +69,23 @@
                 if (password !== confirmPassword) {
                     confirmPasswordError.textContent = "Passwords do not match";
                     return false;
+                } else if (password.length < 6) {
+                    confirmPasswordError.textContent = "Password must be at least 6 characters long";
+                    return false;
+                } else if (!isStrongPassword(password)) {
+                    confirmPasswordError.textContent = "Password must contain at least one uppercase letter, one number, and one special character";
+                    return false;
                 } else {
                     confirmPasswordError.textContent = "";
                     return true;
                 }
+            }
+            function isStrongPassword(password) {
+                var capital = /[A-Z]/;
+                var number = /[0-9]/;
+                var symbol = /[^A-Za-z0-9]/;
+
+                return capital.test(password) && number.test(password) && symbol.test(password);
             }
         </script>
     </div>
