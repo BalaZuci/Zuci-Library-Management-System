@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Library.Models.Borrower>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="h">
+    <h1>List of Borrowers</h1>
+</div>
+<br />
+<p>
+    <a asp-action="Create" class = "others" >Add New Borrower</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowerType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdatedOn)
+            </th>
+            <th></th>
+            <th>GetBorrowersBy</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowerType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedOn)
+            </td>
+            <td>
+                    <a href="@Url.Action("Details", new {  borrowerId = item.BorrowerId })" class="btn btn-info btn-sm me-2" title="Details">
+
+                        <span class="rounded-circle d-inline-block px-2 py-0.5 bg-light">ℹ️ </span> <!-- Information icon -->
+                    </a>
+                    <br /><br />
+
+                    <a href="@Url.Action("Edit", new {  borrowerId = item.BorrowerId })" class="btn btn-primary btn-sm me-2" title="Edit">
+
+                        <span class="rounded-circle d-inline-block px-1 py-0.5 bg-light">✏️</span>    <!-- Pencil icon -->
+
+                    </a>
+                    <br /><br />
+
+                    <a href="@Url.Action("Delete", new {  borrowerId = item.BorrowerId })" class="btn btn-danger btn-sm" title="Delete">
+
+                        <span class="rounded-circle d-inline-block px-1 py-0.5 bg-light">🗑️</span>  <!-- Trash icon -->
+
+                    </a>
+            </td>
+            <td>
+                    @Html.ActionLink("Type", "GetBorrowersByType", new { borrowerType = item.BorrowerType }, new { @class = "others" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

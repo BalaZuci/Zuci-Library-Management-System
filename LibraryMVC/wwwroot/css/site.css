@@ -1,0 +1,133 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-image: url('../images/homeBackground2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.custom-link {
+    background-color: lightgoldenrodyellow;
+    color: green; /* Change the background color as needed */
+    text-decoration: none;
+    padding:5px 5px;
+}
+
+    .custom-link:hover {
+        color: red; 
+    }
+
+.details {
+    background-color:darkgrey;
+    align-content:center;
+}
+
+.display-4{
+    color : black;
+    background-color : blanchedalmond;    
+}
+.text {
+    color: black;
+    background-color: blanchedalmond;
+}
+.headings {
+    color: black;
+    background-color: blanchedalmond;
+}
+
+.last{
+    color:black;
+    background-color :aliceblue;
+}
+
+.register {
+    align-content: center;
+}
+
+.h {
+    text-align: center;
+    background-color: #c0eaf8;
+    color: black;
+}
+
+.hd {
+    background-color: rgba(245, 245, 220, 0.9); /* Light gray background */
+    color: black; /* Blue text */
+}
+
+thead {
+    background-color:royalblue;
+    color : white;
+}
+
+tbody {
+    background-color: #c0eaf8;
+}
+
+tr:hover td {
+    background-color :#e2f5fb;
+}
+
+/*For Borrow Link*/
+.borrow {
+    background-color: red;
+    color: white;
+    text-decoration :none;
+    padding: 5px 5px;
+}
+    .borrow:hover{
+        background-color:#ff7373;
+    }
+
+/*For Return Link*/
+.return {
+    background-color: green;
+    color: white;
+    text-decoration: none;
+    padding: 5px 5px;
+}
+
+    .return:hover {
+        background-color: lawngreen;
+    }
+
+/*For remaining Links in Book page*/
+.others {
+    background-color: #ff0070;
+    color: white;
+    text-decoration: none;
+    padding: 5px 5px;
+}
+    .others:hover{
+        background-color : #fb7ba1;
+    }
+
+/*log out link*/
+.logout {
+    color: black;
+    text-decoration: none;
+    padding:10px 10px;
+}
+.logout:hover{
+    font-weight:bold;
+    color:red;
+}

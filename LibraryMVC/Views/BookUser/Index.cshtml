@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Library.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="h">
+    <h1>List of Books</h1>
+</div>
+<br />
+
+<div style="float: right;">
+    <a asp-action="GetByBorrowedBooks" class="others">Borrowed Books</a>
+</div>
+<br />
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublicationYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityAvailable)
+            </th>
+            <th></th>
+            <th></th>
+            <th>Get Books By</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorName)
+            </td>
+            <td>
+                    @{
+                        string temp = item.PublicationYear.ToString("yyyy");
+                    }
+
+                    @temp
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityAvailable)
+            </td>
+            <td>
+                    @Html.ActionLink("Borrow", "BorrowBook", new { bookId = item.BookId }, new { @class = "borrow" })
+                    <br /> <br />
+            </td>
+            <td>
+                    <a href="@Url.Action("Details", new {  bookId = item.BookId })" class="btn btn-info btn-sm me-2" title="Details">
+
+                        <span class="rounded-circle d-inline-block px-2 py-0.5 bg-light">ℹ️ </span> <!-- Information icon -->
+
+                    </a>
+            </td>
+            <td>
+                    @Html.ActionLink("GetByAuthor", "GetByAuthor", new { author = item.AuthorName }, new { @class = "others" })
+                    <br /><br />
+                    @Html.ActionLink("GetByPublicationYear", "GetByPublicationYear", new { publicationYear = item.PublicationYear }, new { @class = "others" }) 
+                    <br /><br />
+                    @Html.ActionLink("GetByGenre", "GetByGenre", new { genre = item.Genre }, new { @class = "others" })
+                    <br />
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

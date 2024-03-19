@@ -1,0 +1,130 @@
+﻿@model Library.Models.Borrower
+
+@{
+    ViewData["Title"] = "Register";
+
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('../images/loginAndRegisterBG.png');
+            background-size: cover;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white; /* Text color for dark background */
+            margin: 0; /* Remove default margin */
+        }
+
+        html, body {
+            height: 100%; /* Make sure HTML and body take up full viewport height */
+        }
+
+        /* Style for the form container */
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
+            padding: 20px;
+            border-radius: 5px;
+            width: 700px;
+            text-align: center;
+        }
+
+            /* Style for form elements */
+            .form-container input[type="text"],
+            .form-container input[type="password"],
+            .form-container input[type="submit"],
+            .form-container select {
+                width: 100%;
+                padding: 10px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                box-sizing: border-box;
+            }
+
+            /* Style for submit button */
+            .form-container input[type="submit"] {
+                background-color: #4caf50;
+                color: white;
+                cursor: pointer;
+            }
+
+                .form-container input[type="submit"]:hover {
+                    background-color: #45a049;
+                }
+
+        .button {
+            background-color: #5349ff;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Style for links */
+        a {
+            color: white; /* Set link color to white */
+        }
+    </style>
+</head>
+<body>
+    <hr />
+    <div class="container d-flex justify-content-center align-items-center h-100">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <form asp-action="Register" onsubmit="return validateForm()">
+                        <h1>Registration</h1>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <!-- Form fields -->
+                        <input asp-for="Name" class="form-control" placeholder="Name" required>
+                        <input asp-for="EmpId" class="form-control" placeholder="Employee ID" required>
+                        <input asp-for="Department" class="form-control" placeholder="Department" required>
+                        <input asp-for="Email" class="form-control" placeholder="Email" required>
+                        @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+                        {
+                            <p class="error-message">@ViewData["ErrorMessage"]</p>
+                        }
+                        <input id="Password" asp-for="Password" class="form-control" type="password" placeholder="Password" required>
+                        <input id="ConfirmPassword" class="form-control" type="password" placeholder="Confirm Password" required>
+                        <div id="confirmPasswordError" class="text-danger"></div>
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </form>
+                    <div>
+                        <a asp-action="Login" class="button">Log in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var password = document.getElementById("Password").value;
+            var confirmPassword = document.getElementById("ConfirmPassword").value;
+            var confirmPasswordError = document.getElementById("confirmPasswordError");
+
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = "Passwords do not match";
+                return false;
+            } else {
+                confirmPasswordError.textContent = "";
+                return true;
+            }
+        }
+    </script>
+    <div>
+        <button onclick="window.location='@Url.Action("Index","Home")'" class="button">Back Home</button>
+    </div>
+    <br />
+</body>
+</html>

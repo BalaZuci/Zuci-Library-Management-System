@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Library.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="h">
+    <h1>List of Transactions</h1>
+</div>
+<br />
+<div style="display: flex;">
+    <div>
+        @Html.ActionLink("Active Transactions", "GetActiveTransactions", new { }, new { @class = "others" }) <br />
+    </div>
+    <div style="display: flex; margin-left:auto">
+        <div style="margin-right: 10px;">
+            @Html.ActionLink("Get Borrow Transactions", "GetAllBorrowTransactions", new { }, new { @class = "others" })
+        </div>
+        <div style="margin-right: 10px;">
+            @Html.ActionLink("Get Return Transactions", "GetAllReturnTransactions", new { }, new { @class = "others" })
+        </div>
+        <div>
+            @Html.ActionLink("Get By Dates", "GetDates", new { }, new { @class = "others" }) <br />
+        </div>
+    </div>
+</div>
+
+
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrower.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DueDate)
+            </th>
+            <th></th>
+            <th>GetTransactionsBy</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Borrower.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                    <a href="@Url.Action("Details", new {  transactionId = item.TransactionId })" class="btn btn-info btn-sm me-2" title="Details">
+
+                        <span class="rounded-circle d-inline-block px-2 py-0.5 bg-light">ℹ️ </span> <!-- Information icon -->
+
+                    </a>
+                    <br /><br />
+                    <a href="@Url.Action("Delete", new {  transactionId = item.TransactionId })" class="btn btn-danger btn-sm" title="Delete">
+
+                        <span class="rounded-circle d-inline-block px-1 py-0.5 bg-light">🗑️</span>  <!-- Trash icon -->
+
+                    </a>
+            </td>
+            <td>
+                    @Html.ActionLink("Borrower", "GetTransactionsByBorrowerId", new { borrowerId = item.BorrowerId }, new { @class = "others" })
+                    <br /><br />
+                    @Html.ActionLink("Book", "GetTransactionsByBookId", new { bookId = item.BookId }, new { @class = "others" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
