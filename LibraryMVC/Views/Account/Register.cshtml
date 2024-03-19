@@ -33,7 +33,7 @@
         /* Style for the form container */
         .form-container {
             background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
-            padding: 20px;
+            padding: 50px;
             border-radius: 5px;
             width: 700px;
             text-align: center;
@@ -100,7 +100,7 @@
                         <input type="submit" value="Create" class="btn btn-primary" />
                     </form>
                     <div>
-                        <a asp-action="Login" class="button">Log in</a>
+                        Already have Account? <a asp-action="Login" style="background-color:bisque; color:black; padding : 2px">Log in</a>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
         }
     </script>
     <div>
-        <button onclick="window.location='@Url.Action("Index","Home")'" class="button">Back Home</button>
+        <button onclick="window.location='@Url.Action("Index","Home")'" style="background-color:bisque; color:black; padding : 2px">Back Home</button>
     </div>
     <br />
 </body>
