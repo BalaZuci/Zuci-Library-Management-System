@@ -7,6 +7,9 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 
 namespace LibraryMVC.Controllers
 {
+    /// <summary>
+    /// Controller for Log in and register
+    /// </summary>
     public class AccountController : Controller
     {
         static HttpClient svc = new HttpClient() { BaseAddress = new Uri("http://localhost:5273/api/BorrowerUser/") };
@@ -14,12 +17,23 @@ namespace LibraryMVC.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// for log in page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Login()
         {
             ViewData["ErrorMessage"] = TempData["ErrorMessage"];
             return View();
         }
-
+        /// <summary>
+        /// For verifing the login details
+        /// createing the session variables
+        /// if login details are wrong, then showing error message
+        /// </summary>
+        /// <param name="email">specifies the Borrower</param>
+        /// <param name="password">password for logging in</param>
+        /// <returns>successfull, redirected to home page nor to login page with error message</returns>
         [HttpPost]
         public async Task<ActionResult> Verify(string email, string password)
         {
@@ -51,15 +65,16 @@ namespace LibraryMVC.Controllers
         }
 
 
-
-        // GET: AccountController/Create
+        /// <summary>
+        /// for registering a new user
+        /// </summary>
+        /// <returns>to home page if successfull, nor to register page showing the error</returns>
         public ActionResult Register()
         {
             Borrower borrower = new Borrower();
             return View(borrower);
         }
 
-        // POST: AccountController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(Borrower borrower)
@@ -84,6 +99,11 @@ namespace LibraryMVC.Controllers
                 return View();
             }
         }
+
+        /// <summary>
+        /// for logging out
+        /// </summary>
+        /// <returns>redirected to home page</returns>
         public ActionResult Logout()
         {
             HttpContext.Session.Clear();
