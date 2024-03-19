@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Library.Repos
 {
+    /// <summary>
+    /// Interface for transaction repository
+    /// contains the methods of admin as well as user
+    /// </summary>
     public interface ITransactionRepo
     {
         //Admin Methods

@@ -17,10 +17,10 @@ namespace Library.Repos
     {
         LibraryDBContext cnt = new LibraryDBContext();
         /// <summary>
-        /// 
+        /// For getting list of books the borrower had at present.
         /// </summary>
-        /// <param name="borrowerId"></param>
-        /// <returns></returns>
+        /// <param name="borrowerId">Borrower Id the primary key, getting from the current session</param>
+        /// <returns>List of Books that borrower had at the moment</returns>
         /// <exception cref="LibraryException"></exception>
         public async Task<List<Book>> BorrowerBooks(int borrowerId)
         {
@@ -45,6 +45,13 @@ namespace Library.Repos
                 throw new LibraryException(ex.Message);
             }
         }
+        /// <summary>
+        /// To borrow a book if it is present and not taken any copy of the particular book.
+        /// </summary>
+        /// <param name="bookId">bookId specifies the Book the borrower need to borrow</param>
+        /// <param name="borrowerId">boorowerId specifies the Boorower identification</param>
+        /// <returns>returns void</returns>
+        /// <exception cref="LibraryException"> any exception which may occur</exception>
         public async Task BorrowBook(int bookId, int borrowerId)
         {
             int borrowCount = await cnt.Transactions.CountAsync(t => (t.BorrowerId == borrowerId) && (t.BookId == bookId) && (t.TransactionType == "Borrow"));
@@ -78,7 +85,12 @@ namespace Library.Repos
                 throw new LibraryException(ex.Message);
             }
         }
-
+        /// <summary>
+        /// to delete the book from database
+        /// </summary>
+        /// <param name="bookId">bookId tells which book to delete</param>
+        /// <returns>nothing</returns>
+        /// <exception cref="LibraryException">normal exception</exception>
         public async Task DeleteBook(int bookId)
         {
             try
@@ -92,13 +104,21 @@ namespace Library.Repos
                 throw new LibraryException(ex.Message);
             }
         }
-
+        /// <summary>
+        /// for getting all books present in the database
+        /// </summary>
+        /// <returns>List of Books</returns>
         public async Task<List<Book>> GetAllBooks()
         {
             List<Book> books = await cnt.Books.ToListAsync();
             return books;
         }
-
+        /// <summary>
+        /// Gets details of particular book
+        /// </summary>
+        /// <param name="bookId">bookId specifies which book is needed</param>
+        /// <returns>Book object</returns>
+        /// <exception cref="LibraryException">if book doesn't exists return exception</exception>
         public async Task<Book> GetBookById(int bookId)
         {
             try
@@ -111,7 +131,12 @@ namespace Library.Repos
                 throw new LibraryException("No Such Book Id exists.");
             }
         }
-
+        /// <summary>
+        /// for getting the particular books written by particular author
+        /// </summary>
+        /// <param name="author">author name</param>
+        /// <returns>List of books</returns>
+        /// <exception cref="LibraryException">throws exception, if author name doesn't exists</exception>
         public async Task<List<Book>> GetByAuthor(string author)
         {
             try
@@ -124,7 +149,12 @@ namespace Library.Repos
                 throw new LibraryException("No Such Author Name exists.");
             }
         }
-
+        /// <summary>
+        /// for getting the books of particular genre
+        /// </summary>
+        /// <param name="genre">genre name for searching in database</param>
+        /// <returns>List of books</returns>
+        /// <exception cref="LibraryException">throws exception if genre doesn't exists</exception>
         public async Task<List<Book>> GetByGenre(string genre)
         {
             try
@@ -137,7 +167,12 @@ namespace Library.Repos
                 throw new LibraryException("No Such Genre exists.");
             }
         }
-
+        /// <summary>
+        /// for getting the books publicated on the particular year
+        /// </summary>
+        /// <param name="publicationYear">it contains the year</param>
+        /// <returns>list of books</returns>
+        /// <exception cref="LibraryException">throws exception, something went wrong</exception>
         public async Task<List<Book>> GetByPublicationYear(DateTime publicationYear)
         {
             try
@@ -165,7 +200,13 @@ namespace Library.Repos
                 throw new LibraryException(ex.Message);
             }
         }
-
+        /// <summary>
+        /// returns book, adds a transaction in transaction table
+        /// </summary>
+        /// <param name="bookId">which book to return </param>
+        /// <param name="borrowerId">who is returning the book</param>
+        /// <returns>void</returns>
+        /// <exception cref="LibraryException">throws error if book is not taken, if anything went worng</exception>
         public async Task ReturnBook(int bookId, int borrowerId)
         {
             int borrowCount = await cnt.Transactions.CountAsync(t => (t.BorrowerId == borrowerId) && (t.BookId == bookId) && (t.TransactionType == "Borrow"));
@@ -196,7 +237,13 @@ namespace Library.Repos
                 throw new LibraryException(ex.Message);
             }
         }
-
+        /// <summary>
+        /// this method will update the book details
+        /// </summary>
+        /// <param name="bookId">specifies the book to be edited</param>
+        /// <param name="book">book object contains updated details of the book</param>
+        /// <returns>void</returns>
+        /// <exception cref="LibraryException">throws exception if book not found or something went wrong</exception>
         public async Task UpdateBook(int bookId, Book book)
         {
             try

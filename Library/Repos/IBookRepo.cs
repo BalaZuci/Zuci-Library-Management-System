@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Library.Repos
 {
     /// <summary>
-    /// Interface for the Book Repository, it contains all the methods for Admin and User.
+    /// Interface to be implemented in the Book Repository class, it contains all the methods for Admin and User.
     /// </summary>
     public interface IBookRepo
     {

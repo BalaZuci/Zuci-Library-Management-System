@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Library.Repos
 {
+    /// <summary>
+    /// interface for BorrowerRepo class, it contains all the methods for admin and user
+    /// </summary>
     public interface IBorrowerRepo
     {
         Task<Borrower> GetBorrowerById(int borrowerId);
